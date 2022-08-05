@@ -91,7 +91,7 @@ func Decrypt(str, key []byte) []byte{
 
 func Write(text *string){
 
-		filePath := "./a.txt"
+		filePath := "./log.txt"
 		file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println("文件打开失败", err)
