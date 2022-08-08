@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 func TestGetOrder(t *testing.T){
 	//1,加密
@@ -22,11 +24,19 @@ func TestGetOrder(t *testing.T){
     secret := Encrypt(origin, []byte(desKey[:des.BlockSize]))
 	Write(secret)
 	//2，请求
-	url := "https://app.xiaozhibaoxian.com/bxpf-api/orderDetailStatus"
+	url := "http://app.xiaozhibaoxian.com/bxpf-api/API/v1"
 	param := "data=" + *secret
+	param += "&partner_id=HZZ1658213564629"
+	mill := time.Now().UnixNano() / 1e6
+	param += "&time="+strconv.Itoa(int(mill))
+	//data=xxx&time=xxx&md5key
+	param += "&sign=1"
 	resp := POSTUrlencoded(&url, &param)
 	Write(resp)
 	//
+}
+func Get(url, param *string){
+
 }
 func POSTUrlencoded(url, param *string) *string{
 	resp, err := http.Post(*url,
