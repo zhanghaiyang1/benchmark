@@ -4,6 +4,9 @@ import (
 	"crypto/des"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strings"
 	"testing"
 )
 func TestGetOrder(t *testing.T){
@@ -19,10 +22,29 @@ func TestGetOrder(t *testing.T){
     secret := Encrypt(origin, []byte(desKey[:des.BlockSize]))
 	Write(secret)
 	//2，请求
-
+	url := "https://app.xiaozhibaoxian.com/bxpf-api/orderDetailStatus"
+	param := "data=" + *secret
+	resp := POSTUrlencoded(&url, &param)
+	Write(resp)
 	//
 }
+func POSTUrlencoded(url, param *string) *string{
+	resp, err := http.Post(*url,
+	"application/x-www-form-urlencoded",
+	strings.NewReader(*param))
+	if err != nil {
+		fmt.Printf("Error: %+v", err)
+	}
 
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("Error: %+v", err)
+	}
+	res := string(body)
+	fmt.Println(res)
+	return &res
+}
 type OrderReq struct {
 	Head struct {
 		FirmCode        string `json:"firm_code"`
