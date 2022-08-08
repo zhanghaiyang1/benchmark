@@ -41,9 +41,13 @@ func Encrypt(data, key []byte) *string{
 	if length % 8 > 0 {
 
 		out = make([]byte, length + (8 - length % 8 ))	
+		add := 8 - length % 8 
+		for add > 0 {
+			data = append(data, 0)
+			add--
+		}
 	}
     dst := out
-	fmt.Println("dst:", len(dst))
 	// mark := false
     for len(data) > 0 {
 		// for len(dst) >0 && len(dst) < 8 {
@@ -92,9 +96,8 @@ func Decrypt(str, key []byte) []byte{
         dst = dst[bs:]
     }
     // out = PKCS5UnPadding(out)
-	res := ""
-	res = string(out)
-	fmt.Println("res:", res)
+
+	fmt.Println("out:", out)
 	return out
 }
 
