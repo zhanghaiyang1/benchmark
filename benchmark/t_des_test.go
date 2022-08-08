@@ -50,17 +50,7 @@ func Encrypt(data, key []byte) *string{
     dst := out
 	// mark := false
     for len(data) > 0 {
-		// for len(dst) >0 && len(dst) < 8 {
-		// 	fmt.Println("dst:", dst)
-		// 	fmt.Println("data:", data)
-		// 	dst  = append(dst, 0)
-		// 	data = append(data, 0)
-		// 	mark = true
-		// }
-		// if mark == true {
-		// 	block.Encrypt(dst, data)
-		// 	break
-		// }
+
 		block.Encrypt(dst, data[:bs])
         data = data[bs:]
         dst = dst[bs:]
