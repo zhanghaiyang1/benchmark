@@ -1,5 +1,4 @@
 package main
-
 import (
 	"bufio"
 	"crypto/des"
@@ -23,7 +22,7 @@ func TestEncrypt(t *testing.T) {
 	origin := `{"head":{"firm_code":"","sub_signature_no":"AQY20220719163013499i68X","app_type":"APP_TYPE:H5","emp_num":"","biz_code":"payNotice","subjectStyle":"","main_part_code":"B202103190022","application_id":"YY20220719163549998OBoR","userCode":"HZZ1658213564629","partner_id":"HZZ1658213564629","amountStyle":"","remark9":"","front_env":"","remark8":"","remark5":"","remark10":"","remark4":"","remark7":"","remark6":"","remark1":"4","main_signature_no":"MQY20220719162852682jVG5","remark3":"","remark2":""},"body":{"msg":"TRADE_SUCCESS","code":"0000","data":{"pay_status":"ODR_PAY_STATUS:2","pay_chanel":"alipay","pay_serial_number":"2022080322001400171418376855","order_group_id":"a9dccf96719844ba9aac73bd230","pay_amount":"0.01","pay_card_no":"2088612964400174","order_id":"a9dccf96719844ba9aac73bd230","pay_time":"20220803114836"}}}`
 	Encrypt([]byte(origin), []byte(desKey[:des.BlockSize]))	
 }
-func Encrypt(data, key []byte) {
+func Encrypt(data, key []byte) *string{
 	block, err := des.NewCipher(key)
 	if err != nil {
 		fmt.Printf("err:%+v\n", err)
@@ -41,8 +40,7 @@ func Encrypt(data, key []byte) {
 	baseOne := base64.StdEncoding.EncodeToString(out)
 	baseTwo := base64.StdEncoding.EncodeToString([]byte(baseOne))
 
-	fmt.Println(baseTwo)
-	Write(&baseTwo)
+	return &baseTwo
 }
 
 func Decrypt(str, key []byte) []byte{
@@ -57,20 +55,6 @@ func Decrypt(str, key []byte) []byte{
 	}
 	bs := block.BlockSize()
 
-	// 返回结果
-	// decryptData := make([]byte, len(decode_data))
-
-	// //存储每次解密的数据
-	// tmpData := make([]byte, bs)
-	// // //分组分块解密
-	// for index := 0; index < len(decode_data); index += bs {
-	// 	block.Decrypt(tmpData, decode_data[index:index+bs])
-	// 	copy(decryptData[index:index+bs], tmpData)
-	// }
-	// fmt.Println(string(decryptData))
-	// res := ""
-	// res = string(decryptData)
-	// Write(&res)
 	out := make([]byte, len(src))
     dst := out
     if len(src) % bs != 0 {
