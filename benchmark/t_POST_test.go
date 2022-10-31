@@ -19,7 +19,7 @@ func TestPostUrlencoded(t *testing.T) {
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		// handle error
+		fmt.Println(err)
 	}
 
 	fmt.Println(string(body))

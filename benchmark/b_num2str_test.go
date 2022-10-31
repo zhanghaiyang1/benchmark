@@ -11,7 +11,7 @@ func BenchmarkSprintfNum2Str(b *testing.B) {
 	num := 10
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		fmt.Sprintf("%d", num)
+		_ = fmt.Sprintf("%d", num)
 	}
 }
 

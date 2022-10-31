@@ -5,13 +5,11 @@ import (
 	"testing"
 	"net/url"
 )
-
+/* 
+url截取
+*/
 
 func Test_Url(t *testing.T) {
-	price := 1010000
-	rate := 10
-	res := price * rate / 100
-	fmt.Println("res:", res)
 
 	resUrl := "http://hhuibao.oss-cn-qingdao.aliyuncs.com"
 	link, _ := url.Parse(resUrl)

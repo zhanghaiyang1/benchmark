@@ -5,7 +5,9 @@ import (
 	"testing"
 	"time"
 )
-
+/* 
+时间转换
+*/
 
 func Test_Time(t *testing.T) {
 	timestamp := 1653614776
@@ -16,10 +18,7 @@ func unixToStr(timeUnix int64, layout string) string {
 	timeStr := time.Unix(timeUnix, 0).Format(layout)
 	return timeStr
 }
-// func strToUnix(timeUnix int64, layout string) string {
-// 	timeStr := timeUnix.Format("2006-01-02 15:04:05")
-// 	return timeStr
-// }
+
 func Test_Single(t *testing.T){
 	res:=time.Now().Format("200601")
 	fmt.Println("res:", res)
