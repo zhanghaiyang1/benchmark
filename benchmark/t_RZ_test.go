@@ -63,7 +63,7 @@ func TestGetLink(t *testing.T) {
 func TestOrderDetail(t *testing.T) {
 
 	detailReq := OrderDetailReq{}
-	detailReq.QuotationNumber = "SMECLE23003704"
+	detailReq.QuotationNumber = "SMECLE23003802"
 
 	//获取sign
 	bodyByte, _ := json.Marshal(detailReq)
